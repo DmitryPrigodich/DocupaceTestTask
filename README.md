@@ -1,11 +1,11 @@
 # DocupaceTestTask
 A test task attempt for a Docupace.
 
-"could you complete it in Java?" (c)
+_"could you complete it in Java?" (c)_
 
 1. Install Nightwatchjs ( http://nightwatchjs.org/ )
 2. Using Nightwatch, write a script for automated test to:
-  + Navigate to ​https://www.united.com
+  + Navigate to https://www.united.com
   + Fill the search criteria:
     - One-way flight
     - From “New York JFK” to “Miami, FL, US (MIA - All Airports)”
