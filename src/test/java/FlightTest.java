@@ -24,7 +24,6 @@ public class FlightTest {
     @After
     public void afterTest(){
         driver.close();
-        driver.quit();
     }
 
     @Test
@@ -34,6 +33,18 @@ public class FlightTest {
 
     @Test
     public void testMainPage(){
-        driver.get(Constants.TEST_PAGE_URL);
+        PageMain mainPage = new PageMain(driver);
+        mainPage
+            .selectOneWayFlight()
+            .selectTextboxDepartDate()
+            .selectTextboxFromNewYorkJFK()
+            .selectTextboxToMiami()
+            .selectDropdownEconomyClass();
+
+        PageFlightTable flightTablePage = mainPage.clickButtonFindFlights();
+        flightTablePage.sortFlightsByEconomy();
+
+        Object toPrint = flightTablePage.collectDataToJSON();
+        System.out.println(toPrint.toString());
     }
 }
