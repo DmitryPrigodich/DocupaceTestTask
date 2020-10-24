@@ -8,15 +8,9 @@ public class PageAbstract {
 
     public PageAbstract(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+        this.wait = new WebDriverWait(driver, 15);
     }
 
     protected WebDriverWait wait;
     protected WebDriver driver;
-
-    public void waitFewSeconds(long seconds){
-        try{
-            Thread.sleep(seconds*1000);
-        } catch(Exception ignored){}
-    }
 }

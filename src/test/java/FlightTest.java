@@ -34,17 +34,16 @@ public class FlightTest {
     @Test
     public void testMainPage(){
         PageMain mainPage = new PageMain(driver);
-        mainPage
-            .selectOneWayFlight()
-            .selectTextboxDepartDate()
-            .selectTextboxFromNewYorkJFK()
-            .selectTextboxToMiami()
-            .selectDropdownEconomyClass();
+        mainPage.selectOneWayFlight();
+        mainPage.selectFlightDepartDate();
+        mainPage.selectFlightToMiami();
+        mainPage.selectFlightFromNewYorkJFK();
+        mainPage.selectFlightEconomyClass();
 
         PageFlightTable flightTablePage = mainPage.clickButtonFindFlights();
-        flightTablePage.sortFlightsByEconomy();
-
-        Object toPrint = flightTablePage.collectDataToJSON();
-        System.out.println(toPrint.toString());
+        Helper.waitFewSeconds(20);
+        flightTablePage.sortFlightsByEconomyAsc();
+        flightTablePage.showAllFlights();
+        flightTablePage.collectDataToJSON();
     }
 }

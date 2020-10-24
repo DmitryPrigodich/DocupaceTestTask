@@ -14,6 +14,11 @@ _"could you complete it in Java?" (c)_
   + Click Find flights
   + In the flight table:
     - Sort the flights by Economy (Most Restricted), lowest price first
-    - Collect Depart, Arrive, Stops, Duration, Price (Economy (Most Restricted)price only) data in a json object.
+    - Collect (Economy (Most Restricted)price only) data in a json object.
+        - Depart, 
+        - Arrive, 
+        - Stops, 
+        - Duration, 
+        - Price 
     - If the flight is not available for Price criteria: (Economy (Most Restricted),filter the flight data out of the json object
     - Print the final json object in the console.
