@@ -3,7 +3,7 @@ A test task for a Docupace.
 
 _"could you complete it in Java?" (c)_
 
-###THE TASK
+### THE TASK
 1. Install Nightwatchjs ( http://nightwatchjs.org/ )
 2. Using Nightwatch, write a script for automated test to:
   + Navigate to https://www.united.com
@@ -24,7 +24,7 @@ _"could you complete it in Java?" (c)_
     - If the flight is not available for Price criteria: (Economy (Most Restricted),filter the flight data out of the json object
     - Print the final json object in the console.
 
-###THE RESULT
+### THE RESULT
 - Test is getting from the initial page to the second with the correct data input;
 - Flight table is visible
 - Data gathered to JSON and printed out to log - well, w/o trimming extra, and there might not be everything
