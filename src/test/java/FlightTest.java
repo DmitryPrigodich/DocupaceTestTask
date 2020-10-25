@@ -32,7 +32,7 @@ public class FlightTest {
     }
 
     @Test
-    public void testMainPage(){
+    public void printAvailableFlightsTest(){
         PageMain mainPage = new PageMain(driver);
         mainPage.selectOneWayFlight();
         mainPage.selectFlightDepartDate();
@@ -41,7 +41,6 @@ public class FlightTest {
         mainPage.selectFlightEconomyClass();
 
         PageFlightTable flightTablePage = mainPage.clickButtonFindFlights();
-        Helper.waitFewSeconds(20);
         flightTablePage.sortFlightsByEconomyAsc();
         flightTablePage.showAllFlights();
         flightTablePage.collectDataToJSON();

@@ -15,7 +15,7 @@ public class PageFlightTable extends PageAbstract{
     public PageFlightTable(WebDriver driver) {
         super(driver);
         logger.info("Flight Table page loading...");
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("cabinType")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("column-ECO-BASIC")));
     }
 
     public PageFlightTable sortFlightsByEconomyAsc(){
@@ -28,32 +28,56 @@ public class PageFlightTable extends PageAbstract{
 
     public PageFlightTable showAllFlights(){
         logger.info("Show all flights");
+    logger.info("flight number is " + getFlightNumber());
         driver.findElement(By.id("a-results-show-all")).click();
+    logger.info("flight number is " + getFlightNumber());
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='flight-duration otp-tooltip-trigger']")));
+
         return this;
     }
 
     public String collectDataToJSON(){
         logger.info("Collect Data to JSON");
-        int flightNumber = driver.findElements(By.xpath("//ul[@id='flight-result-list-revised']/li")).size();
-
-        logger.info(driver.findElement(By.xpath("//div[@class='flight-time flight-time-depart']")).getText());
+        int flightNumber = getFlightNumber();
 
         List<Map<String, String>> flightslist = new ArrayList<>();
-        for(int i = 0; i < flightNumber; i++){
-            if("Not available".equals(driver.findElement(By.xpath("//div[@class='price-point price-point-revised use-roundtrippricing']["+i+"]")).getText())){
-                flightslist.add(Map.ofEntries(
-                        Map.entry("departureTime", driver.findElement(By.xpath("//div[@class='flight-time flight-time-depart']["+i+"]")).getText())
-                        ,Map.entry("arrivalTime", driver.findElement(By.xpath("//div[@class='flight-time flight-time-arrive']["+i+"]")).getText())
-                        ,Map.entry("stopsNumber", driver.findElement(By.xpath("//div[@class='connection-count non-stop']["+i+"]")).getText())
-                        ,Map.entry("durationTime", driver.findElement(By.xpath("//a[@class='flight-duration otp-tooltip-trigger']["+i+"]")).getText())
-                        ,Map.entry("price", driver.findElement(By.xpath("//div[@class='price-point price-point-revised use-roundtrippricing']["+i+"]")).getText())
-                ));
+        try{
+            for(int i = 1; i < flightNumber; i++){
+                if(!flightPrice(i).contains("Not available")){
+                    flightslist.add(Map.ofEntries(
+                            Map.entry("departureTime", departTime(i))
+                            ,Map.entry("arrivalTime", arriveTime(i))
+                            ,Map.entry("stopsNumber", connectionNumber(i))
+                            ,Map.entry("durationTime", flightDuration(i))
+                            ,Map.entry("price", flightPrice(i))
+                    ));
+                }
             }
-        }
+        }catch(Exception ignored){}
 
         String flightTableJson = new Gson().toJson(flightslist);
         logger.info("Available Flight List:");
         logger.info(flightTableJson);
         return flightTableJson;
+    }
+
+    private String departTime(int index){
+        return driver.findElement(By.xpath("//li["+index+"]//div[@class='flight-time flight-time-depart']")).getText();
+    }
+    private String arriveTime(int index){
+        return driver.findElement(By.xpath("//li["+index+"]//div[@class='flight-time flight-time-arrive']")).getText();
+    }
+    private String connectionNumber(int index){
+        return driver.findElement(By.xpath("//li["+index+"]//div[@class='connection-count non-stop']")).getText();
+    }
+    private String flightDuration(int index){
+        return driver.findElement(By.xpath("//li["+index+"]//a[@class='flight-duration otp-tooltip-trigger']")).getText();
+    }
+    private String flightPrice(int index){
+        return driver.findElement(By.xpath("//li["+index+"]//div[@class='price-point price-point-revised use-roundtrippricing']")).getText();
+    }
+
+    private int getFlightNumber(){
+        return driver.findElements(By.xpath("//ul[@id='flight-result-list-revised']/li")).size();
     }
 }

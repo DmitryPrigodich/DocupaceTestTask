@@ -61,5 +61,21 @@ public class PageMain extends PageAbstract{
         driver.findElement(By.xpath("//button[@aria-label='Find flights']")).click();
         return new PageFlightTable(driver);
     }
+
+//    public WebElement radiobuttonOneWay(){
+//        return driver.findElement(By.id("oneway"));
+//    }
+//    public WebElement textfieldFrom (){
+//        return driver.findElement(By.id("bookFlightOriginInput"));
+//    }
+//    public WebElement textfieldTo (){
+//        return driver.findElement(By.id("bookFlightOriginInput"));
+//    }
+//    public WebElement textfieldDates(){
+//        return driver.findElement(By.id("DepartDate"));
+//    }
+//    public WebElement dropdownClass(){
+//        return driver.findElement(By.id("bookFlightOriginInput"));
+//    }
 }
 
