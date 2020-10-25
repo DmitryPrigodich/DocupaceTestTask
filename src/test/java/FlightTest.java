@@ -42,7 +42,7 @@ public class FlightTest {
 
         PageFlightTable flightTablePage = mainPage.clickButtonFindFlights();
         flightTablePage.sortFlightsByEconomyAsc();
-        flightTablePage.showAllFlights();
+//        flightTablePage.showAllFlights();
         flightTablePage.collectDataToJSON();
     }
 }
